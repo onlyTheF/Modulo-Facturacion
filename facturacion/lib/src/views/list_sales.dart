@@ -1,33 +1,101 @@
+import 'dart:async';
 import 'dart:math';
+import 'package:facturacion/Models/factura.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../navigation_bar/nav_bar.dart';
 
 class ListSales extends StatefulWidget {
- ListSales({Key? key}) : super(key: key);
+ //ListSales({Key? key}) : super(key: key);
+
+ ListSales():super();
+
+ final title = 'Lista de Facturas';
 
   @override
   State <ListSales> createState() =>  ListSalesState();
 }
+
+class Debouncer {
+  final int milliseconds;
+  late VoidCallback action;
+  late Timer _timer;
+
+  Debouncer({required this.milliseconds});
+
+  run(VoidCallback action) {
+    if (null != _timer) {
+      _timer
+          .cancel(); // when the user is continuosly typing, this cancels the timer
+    }
+    // then we will start a new timer looking for the user to stop
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
+}
+
+
 
 class  ListSalesState extends State <ListSales> {
 
   late List<String> listRequest;
   late Random random;
   late GlobalKey<RefreshIndicatorState> refreshListKey;
+
+  late List<Factura> listItems;
+  late List<Factura> filterItem;
+  late GlobalKey<ScaffoldState> scaffoldKey;
+
+  late TextEditingController totalController;
+  late Factura selectedItem;
+  late bool result;
+  late String titleResult;
+  final debouncer = Debouncer(milliseconds: 2000);
+
+
   
 
   @override
   void initState() {
     super.initState();
 
-    // ignore: unnecessary_new
+    listItems = [];
+    result = false;
+    titleResult = widget.title;
+    scaffoldKey = GlobalKey();
+    totalController = TextEditingController();
+
     refreshListKey = new GlobalKey<RefreshIndicatorState>();
     random = Random();
     listRequest = List.empty(growable: true);
     addRequest();
+    getList();
   }
 
+  createTable()
+  {
+
+  }
+
+  getList()
+  {
+
+  }
+
+  addRegister()
+  {
+
+  }
+
+  updateRegister()
+  {
+
+  }
+
+  deleteRegister()
+  {
+
+  }
 
   addRequest(){
       listRequest.add("Carlos");
