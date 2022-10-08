@@ -44,7 +44,7 @@ class  ListSalesState extends State <ListSales> {
   late GlobalKey<RefreshIndicatorState> refreshListKey;
 
   late List<Factura> listItems;
-  late List<Factura> filterItem;
+  late List<Factura> listElements;
   late GlobalKey<ScaffoldState> scaffoldKey;
 
   late TextEditingController totalController;
@@ -65,6 +65,7 @@ class  ListSalesState extends State <ListSales> {
     titleResult = widget.title;
     scaffoldKey = GlobalKey();
     totalController = TextEditingController();
+    listElements = List.empty(growable: true);
 
     refreshListKey = new GlobalKey<RefreshIndicatorState>();
     random = Random();
@@ -90,8 +91,7 @@ class  ListSalesState extends State <ListSales> {
       )
     );
   }
-
-
+  /*
   createTable()
   {
     titleResult = "Tabla creada";
@@ -109,7 +109,7 @@ class  ListSalesState extends State <ListSales> {
     Controlador.getList().then((facturas){
       setState(() {
         listItems = facturas;
-        filterItem = facturas;
+        listElements = facturas;
       });
 
       showMessage(widget.title);
@@ -154,7 +154,7 @@ class  ListSalesState extends State <ListSales> {
         showMessageSnackBar(context, value);
       }
     });
-  }
+  }*/
 
   addRequest(){
       listRequest.add("Carlos");
@@ -243,15 +243,48 @@ class  ListSalesState extends State <ListSales> {
     );
   }
 
+  onSortColumn(index, ascending){
+    if(index == 0){
+      if(ascending){
+        listItems.sort(((a, b) => a.id.compareTo(b.id)));
+      }
+      else{
+        listItems.sort(((a, b) => b.id.compareTo(a.id)));
+      }
+    }
+  }
+
+  onSelectRow(selected, item){
+    setState(() {
+      if(selected){
+        listElements.add(item);
+
+      }
+      else{
+        listElements.remove(item);
+      }
+    });
+    
+  }
+
   SingleChildScrollView gridDataTable() {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: DataTable(
+          sortAscending: result,
+          sortColumnIndex: 0,
           columns: [
             DataColumn(
               label: Text('N# FACTURA'),
+              onSort: ((columnIndex, ascending) {
+                setState(() {
+                  result = !result;
+                });
+
+                onSortColumn(columnIndex, ascending);
+              })
             ),
             DataColumn(
               label: Text('FECHA'),
@@ -269,7 +302,12 @@ class  ListSalesState extends State <ListSales> {
 
           rows: listItems
               .map(
-                (factura) => DataRow(cells: [
+                (factura) => DataRow(
+                  selected: listElements.contains(factura),
+                  onSelectChanged: (value) {
+                    onSelectRow(value, factura);
+                  },
+                  cells: [
                   DataCell(
                     Text(factura.id),
                     onTap: () {
@@ -304,7 +342,9 @@ class  ListSalesState extends State <ListSales> {
                   DataCell(IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      //deleteRegister(factura);
+                      setState(() {
+                        listItems.remove(factura);
+                      });
                     },
                   )),
                   
@@ -333,6 +373,9 @@ class  ListSalesState extends State <ListSales> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               NavBar(),
+              SizedBox(height: 20,),
+              Text("FACTURAS", textAlign: TextAlign.center,),
+              SizedBox(height:20),
               Expanded(
                 child: Container(
                   child: RefreshIndicator(
