@@ -1,7 +1,9 @@
-import 'package:facturacion/Models/factura.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../models/factura.dart';
 
 class Controlador{
 
@@ -60,7 +62,7 @@ class Controlador{
   }
 
   //agregar un nuevo registro
-  static Future<String> addRegister(dynamic total) async {
+  static Future<String> addRegister(String total) async {
     try {
       var map = <String, dynamic>{};
       map['action'] = _ADD_FACT_ACTION;
@@ -80,7 +82,7 @@ class Controlador{
   }
 
   //actualizar un registro existente
-  static Future<String> updateRegister(int id, dynamic total) async {
+  static Future<String> updateRegister(String id, String total) async {
     try {
       var map = <String, dynamic>{};
       map['action'] = _UPDATE_FACT_ACTION;
@@ -101,7 +103,7 @@ class Controlador{
   }
 
   //eliminar un registro
-  static Future<String> deleteRegister(dynamic id) async {
+  static Future<String> deleteRegister(String id) async {
     try {
       var map = <String, dynamic>{};
       map['action'] = _DELETE_FACT_ACTION;

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:facturacion/Models/factura.dart';
 import 'package:facturacion/controllers/controlador.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import '../../models/factura.dart';
 import '../navigation_bar/nav_bar.dart';
 
 class ListSales extends StatefulWidget {
@@ -12,7 +12,7 @@ class ListSales extends StatefulWidget {
 
  ListSales():super();
 
- final title = 'Lista de Facturas';
+ final title = "";
 
   @override
   State <ListSales> createState() =>  ListSalesState();
@@ -60,7 +60,7 @@ class  ListSalesState extends State <ListSales> {
   void initState() {
     super.initState();
 
-    listItems = [];
+    listItems = Factura.getItems();
     result = false;
     titleResult = widget.title;
     scaffoldKey = GlobalKey();
@@ -70,7 +70,6 @@ class  ListSalesState extends State <ListSales> {
     random = Random();
     listRequest = List.empty(growable: true);
     addRequest();
-    getList();
   }
 
   clearText(){
@@ -88,12 +87,6 @@ class  ListSalesState extends State <ListSales> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        /*action: SnackBarAction(
-          label: "NO REMOVER SOLICITUD",
-          onPressed: (){
-            undoDelete(index, item);
-          }
-        ),*/
       )
     );
   }
@@ -162,8 +155,6 @@ class  ListSalesState extends State <ListSales> {
       }
     });
   }
-
-  
 
   addRequest(){
       listRequest.add("Carlos");
@@ -260,76 +251,63 @@ class  ListSalesState extends State <ListSales> {
         child: DataTable(
           columns: [
             DataColumn(
-              label: Text('N Factura'),
+              label: Text('N# FACTURA'),
             ),
             DataColumn(
-              label: Text('Fecha'),
+              label: Text('FECHA'),
             ),
             DataColumn(
-              label: Text('Total Bs.'),
+              label: Text('TOTAL BS'),
+            ),
+             DataColumn(
+              label: Text('DETALLE'),
             ),
             DataColumn(
               label: Text('ELIMINAR'),
             ),
-            DataColumn(
-              label: Text('DETALLE'),
-            ),
           ],
 
-          rows: filterItem
+          rows: listItems
               .map(
                 (factura) => DataRow(cells: [
                   DataCell(
-                    Text(factura.id.toString()),
-                    
-                    /*onTap: () {
-                      _showValues(employee);
-                      // Set the Selected employee to Update
-                      _selectedEmployee = employee;
-                      setState(() {
-                        _isUpdating = true;
-                      });
-                    },*/
-                  ),
-                  DataCell(
-                    Text(
-                      factura.fecha.toString(),
-                    ),
-                    /*onTap: () {
-                      _showValues(employee);
-                      // Set the Selected employee to Update
-                      _selectedEmployee = employee;
-                      // Set flag updating to true to indicate in Update Mode
-                      setState(() {
-                        _isUpdating = true;
-                      });
-                    },*/
-                  ),
-                  DataCell(
-                    Text(
-                      factura.total.toString(),
-                    ),
-                    /*onTap: () {
-                      _showValues(employee);
-                      // Set the Selected employee to Update
-                      _selectedEmployee = employee;
-                      setState(() {
-                        _isUpdating = true;
-                      });
-                    },*/
-                  ),
-                  DataCell(IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      deleteRegister(factura);
+                    Text(factura.id),
+                    onTap: () {
+                      showMessageSnackBar(context, factura.id);
                     },
-                  )),
+                    
+                  ),
+                  DataCell(
+                    Text(
+                      factura.fecha,
+                    ),
+                    onTap: () {
+                      showMessageSnackBar(context, factura.fecha);
+                    },
+                  ),
+                  DataCell(
+                    Text(
+                      factura.total,
+                    ),
+                    onTap: () {
+                      showMessageSnackBar(context, factura.total);
+                    },
+                  ),
+
                   DataCell(IconButton(
                     icon: Icon(Icons.info_rounded),
                     onPressed: () {
                       
                     },
                   )),
+
+                  DataCell(IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      //deleteRegister(factura);
+                    },
+                  )),
+                  
                 ]),
               )
               .toList(),
