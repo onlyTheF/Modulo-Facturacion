@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class Controlador{
 
-  static const dynamic ROOT = 'http://localhost/Facturacion/factura.php';
+  static const dynamic ROOT = 'http://localhost/web/factura.php';
   static const _CREATE_TABLE_ACTION = 'CREATE_TABLE';
   static const _GET_ALL_ACTION = 'GET_ALL';
   static const String _ADD_FACT_ACTION = 'ADD_FACT';
@@ -101,7 +101,7 @@ class Controlador{
   }
 
   //eliminar un registro
-  static Future<String> delteRegister(String id) async {
+  static Future<String> deleteRegister(dynamic id) async {
     try {
       var map = <String, dynamic>{};
       map['action'] = _DELETE_FACT_ACTION;

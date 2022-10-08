@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:facturacion/Models/factura.dart';
+import 'package:facturacion/controllers/controlador.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -72,30 +73,97 @@ class  ListSalesState extends State <ListSales> {
     getList();
   }
 
+  clearText(){
+    totalController.text = "";
+  }
+
+  showMessage(String message) {
+    setState(() {
+      titleResult = message;
+    });
+  }
+
+  showMessageSnackBar(context, message){
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        /*action: SnackBarAction(
+          label: "NO REMOVER SOLICITUD",
+          onPressed: (){
+            undoDelete(index, item);
+          }
+        ),*/
+      )
+    );
+  }
+
+
   createTable()
   {
+    titleResult = "Tabla creada";
+    Controlador.createTable().then((value){
 
+      if('success' == value){
+        showMessageSnackBar(context, value);
+      }
+    });
   }
 
   getList()
   {
+    showMessage('Lista de registros');
+    Controlador.getList().then((facturas){
+      setState(() {
+        listItems = facturas;
+        filterItem = facturas;
+      });
 
+      showMessage(widget.title);
+    });
   }
 
   addRegister()
   {
+    if(totalController.text.isEmpty){
+      print('No debe estar vacio');
+      return;
+    }
 
+    Controlador.addRegister(totalController.text).then((value){
+
+      if('success' == value){
+        getList();
+        showMessageSnackBar(context, value);
+      }
+      clearText();
+    });
   }
 
-  updateRegister()
+  updateRegister(Factura factura)
   {
 
+    Controlador.updateRegister(factura.id, totalController.text).then((value){
+
+      if('success' == value){
+        getList();
+        showMessageSnackBar(context, value);
+        clearText();
+      }
+    });
   }
 
-  deleteRegister()
+  deleteRegister(Factura factura)
   {
-
+    Controlador.deleteRegister(factura.id).then((value){
+      if('success' == value){
+        getList();
+        showMessageSnackBar(context, value);
+      }
+    });
   }
+
+  
 
   addRequest(){
       listRequest.add("Carlos");
@@ -184,6 +252,93 @@ class  ListSalesState extends State <ListSales> {
     );
   }
 
+  SingleChildScrollView gridDataTable() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: DataTable(
+          columns: [
+            DataColumn(
+              label: Text('N Factura'),
+            ),
+            DataColumn(
+              label: Text('Fecha'),
+            ),
+            DataColumn(
+              label: Text('Total Bs.'),
+            ),
+            DataColumn(
+              label: Text('ELIMINAR'),
+            ),
+            DataColumn(
+              label: Text('DETALLE'),
+            ),
+          ],
+
+          rows: filterItem
+              .map(
+                (factura) => DataRow(cells: [
+                  DataCell(
+                    Text(factura.id.toString()),
+                    
+                    /*onTap: () {
+                      _showValues(employee);
+                      // Set the Selected employee to Update
+                      _selectedEmployee = employee;
+                      setState(() {
+                        _isUpdating = true;
+                      });
+                    },*/
+                  ),
+                  DataCell(
+                    Text(
+                      factura.fecha.toString(),
+                    ),
+                    /*onTap: () {
+                      _showValues(employee);
+                      // Set the Selected employee to Update
+                      _selectedEmployee = employee;
+                      // Set flag updating to true to indicate in Update Mode
+                      setState(() {
+                        _isUpdating = true;
+                      });
+                    },*/
+                  ),
+                  DataCell(
+                    Text(
+                      factura.total.toString(),
+                    ),
+                    /*onTap: () {
+                      _showValues(employee);
+                      // Set the Selected employee to Update
+                      _selectedEmployee = employee;
+                      setState(() {
+                        _isUpdating = true;
+                      });
+                    },*/
+                  ),
+                  DataCell(IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      deleteRegister(factura);
+                    },
+                  )),
+                  DataCell(IconButton(
+                    icon: Icon(Icons.info_rounded),
+                    onPressed: () {
+                      
+                    },
+                  )),
+                ]),
+              )
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  
   @override
   Widget build(BuildContext context) {
 
@@ -203,10 +358,8 @@ class  ListSalesState extends State <ListSales> {
               Expanded(
                 child: Container(
                   child: RefreshIndicator(
-                    backgroundColor: Colors.blueAccent,
-                    color: Colors.blue,
                     key: refreshListKey,
-                    child: showList(),
+                    child: gridDataTable(),
                     onRefresh: () async {
                       await refreshList();
                     },
