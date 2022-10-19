@@ -101,9 +101,9 @@
                   </form>
                 </div>
                 <div class="table-responsive-lg pt-4">
-                    <table class="table table-striped caption-top">
+                    <table class="table table-striped caption-top table-success">
                         <caption class="text-capitalize">Lista de registros</caption>
-                        <thead class="table-primary text-dark">
+                        <thead class="table-dark text-white">
                             <tr>
                                 <td>N# Factura</td>
                                 <td>Fecha</td>
@@ -112,19 +112,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!--{% for professor in professors: %}
-                            <tr>
-                                <td>{{ professor.first_name}}</td>
-                                <td>{{ professor.last_name }}</td>
-                                <td>{{ professor.city }}</td>
-                                <td>{{ professor.address }}</td>
-                                <td>{{ professor.salary }}</td>
-                                <td>
-                                   <a href="/edit/{{professor.id}}" class="btn btn-outline-info" >Detalle</a>
-                                   <a href="/delete/{{professor.id}}" class="btn btn-outline-danger" >Eliminar</a>
-                                </td>
+                            <tr *ngFor="let item of coleccion">                       
+                              <td>{{ item.id }}</td>
+                              <td>{{ item.fecha }}</td>
+                              <td>{{ item.total }}</td>
+                              <td>
+                                 <a href="/detail/{{item.id}}" class="btn btn-outline-info" >Detalle</a>
+                                 <a href="/delete/{{item.id}}" class="btn btn-outline-danger" (click)="delete(item.id)" >Eliminar</a>
+                              </td>
                             </tr>
-                            {% endfor %}-->
                         </tbody>
                     </table>
                 </div>
