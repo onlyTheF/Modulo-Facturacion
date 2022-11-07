@@ -7,3 +7,8 @@ export class Venta{
     fecha_actualizacion!: Date;
     fecha_registro!: Date;
 }
+
+export class Filtro{
+    id_venta!: null;
+    fecha_venta!: null;
+}
