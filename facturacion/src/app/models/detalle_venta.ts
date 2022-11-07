@@ -1,4 +1,5 @@
-export class SaleDetails{
+
+export class DetalleVenta{
     id!: number;
     fecha!: string;
     total!: number;
