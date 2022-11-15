@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient } from '@angular/common/http';
 import { DetachedRouteHandle } from '@angular/router';
 import { Venta } from '../models/venta';
+import { Filtro } from '../models/filtro';
 
 @Injectable({
   providedIn: 'root'

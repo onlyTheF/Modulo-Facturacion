@@ -89,7 +89,7 @@
                         </div>
                       </div>
                       <div class="col-4">
-                        <input class="form-control" type="text" name="factura" placeholder="Numero de factura">
+                        <input class="form-control" type="number" name="id_venta" placeholder="Numero de factura" [(ngModel)]="filtro.id_venta">
                       </div>
                       <div class="col-4">
                         <button type="submit" class="btn btn-outline-info text-capitalize w-50" (click)="getList()">
@@ -100,13 +100,13 @@
                   </form>
                 </div>
                 <div class="table-responsive-lg pt-4">
-                    <table class="table caption-top">
-                        <caption class="text-capitalize">Lista de registros</caption>
-                        <thead class="table-primary text-white">
+                    <table class="table caption-top table-hover">
+                        <caption class="text-capitalize text-primary">Lista de registros</caption>
+                        <thead class="table-info text-primary">
                             <tr>
                                 <td>N# Factura</td>
                                 <td>Fecha Venta</td>
-                                <td>Total Bs</td>
+                                <td>Venta Total Bs</td>
                                 <td>Fecha y Hora Actualizacion</td>
                                 <td>Detalle Venta</td>
                                 <td>Anular Venta</td>

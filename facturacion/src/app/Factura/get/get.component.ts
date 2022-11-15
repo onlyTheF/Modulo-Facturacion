@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Filtro, Venta } from 'src/app/models/venta';
+import { Filtro } from 'src/app/models/filtro';
+import { Venta } from 'src/app/models/venta';
 import { FacturaService } from 'src/app/service/factura.service';
 
 @Component({
@@ -11,14 +12,15 @@ export class GetComponent implements OnInit {
 
   ventas: Venta[] = [];
   filtro: Filtro = {
-    id_venta: null,
-    fecha_venta: null
+    id_venta: 0,
+    id_usuario: 0,
+    total_venta: 0,
+    estado: 0
   }
 
   constructor(private facturaService: FacturaService) { }
 
   ngOnInit(): void {
-
     this.getList();
   }
 
@@ -27,7 +29,7 @@ export class GetComponent implements OnInit {
   }
 
   clearFilter(){
-    this.filtro.id_venta = null;
+    //this.filtro.id_venta = null;
     this.getList();
   }
 
