@@ -17,5 +17,9 @@ export class FacturaService {
     return this.http.get<Venta[]>(this.Url);
   }
 
+  delete(id: number){
+    return this.http.delete(`${this.Url}/${id}`)
+  }
+
 
 }

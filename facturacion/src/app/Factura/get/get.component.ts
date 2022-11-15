@@ -18,7 +18,9 @@ export class GetComponent implements OnInit {
     estado: 0
   }
 
-  constructor(private facturaService: FacturaService) { }
+  constructor(
+    private facturaService: FacturaService
+  ) { }
 
   ngOnInit(): void {
     this.getList();
@@ -31,6 +33,12 @@ export class GetComponent implements OnInit {
   clearFilter(){
     //this.filtro.id_venta = null;
     this.getList();
+  }
+  
+  onDelete(id: number){
+    this.facturaService.delete(id).subscribe(() => {
+      this.facturaService.getList().subscribe(data => this.ventas = data);
+    });
   }
 
 }
