@@ -3,6 +3,7 @@ import {HttpClient } from '@angular/common/http';
 import { DetachedRouteHandle } from '@angular/router';
 import { Venta } from '../models/venta';
 import { Filtro } from '../models/filtro';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class FacturaService {
   }
 
   delete(id: number){
-    return this.http.delete(`${this.Url}/${id}`)
+    return this.http.delete(`${this.Url}/${id}`);
   }
 
 

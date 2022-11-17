@@ -1,6 +1,6 @@
 export class Venta{
     id_venta!: number;
-    id_usuario!: number;
+    id_user!: number;
     fecha_venta!: Date;
     total_venta!: number;
     estado!: number;
