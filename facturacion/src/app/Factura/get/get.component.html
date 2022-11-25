@@ -5,75 +5,167 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://bootswatch.com/5/cerulean/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Pymes</title>
 </head>
 <body>
-    <div class="fixed-top mb-4">
-        <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="/">PYMEs</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                  
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-capitalize disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Perfil
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="http://190.104.30.135/?page_id=440">Informacion</a></li>
-                      <li><a class="dropdown-item" href="https://www.cochabamba.bo/">Ciudad</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-capitalize" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Solutions
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="http://190.104.30.135/?page_id=440">Informacion</a></li>
-                      <li><a class="dropdown-item" href="https://www.cochabamba.bo/">Ciudad</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="http://www.univalle.edu/">Pricing</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-capitalize" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Resources
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="http://190.104.30.135/?page_id=440">Informacion</a></li>
-                      <li><a class="dropdown-item" href="https://www.cochabamba.bo/">Ciudad</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-capitalize" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Company
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="http://190.104.30.135/?page_id=440">Informacion</a></li>
-                      <li><a class="dropdown-item" href="https://www.cochabamba.bo/">Ciudad</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Registrate</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Iniciar Sesion</a>
-                  </li>
-                </ul>
+  <header>
 
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                </form>
-              </div>
-            </div>
-        </nav>
-    </div>
-    
-    <div class="container mt-5">
+    <nav class="navigation">
+      <div class="logo"> 
+        <img src="assets/svg/logo-pymes.svg" height="40px">
+      </div>
+      
+      <div class="toggle__menu" id="toggle-menu">
+        <i class="bx bx-grid-alt"></i>
+      </div>
+      <ul class="nav__list nav_menu" id="nav-menu">
+        <div class="close__menu" id="close-menu">
+          <i class="bx bx-x"></i>
+        </div>
+        <li class="nav__item">
+          <a href="#" class="nav__link">Menú</a>
+        </li>
+        <li class="nav__item dropdown nav_list_menu">
+          <a href="#" class="nav__link dropdown__link">Ventas 
+            <i class="bx bxs-chevron-down dropdown__icon"></i>
+          </a>
+
+          <div class="megamenu">
+            <ul class="content">
+              <li class="megamenu__item header__megamenu">Ej</li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-palette"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Learn the basics of users</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-sidebar"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Create your own user experience</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-rocket"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Create your own user experience</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-user-voice"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Get custom training</p>
+                </div>
+              </li>
+            </ul>
+            <ul class="content">
+              <li class="megamenu__item header__megamenu">Ej</li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-palette"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Learn the basics of users</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-sidebar"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Create your own user experience</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-rocket"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Create your own user experience</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-user-voice"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Get custom training</p>
+                </div>
+              </li>
+            </ul>
+            <ul class="content">
+              <li class="megamenu__item header__megamenu">Ej</li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-palette"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Learn the basics of users</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-sidebar"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Create your own user experience</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-rocket"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Create your own user experience</p>
+                </div>
+              </li>
+              <li class="megamenu__item">
+                <div class="menu__icon">
+                  <i class="bx bx-user-voice"></i>
+                </div>
+                <div class="megamenu__link">
+                  <a href="#">Ej</a>
+                  <p>Get custom training</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        
+
+        <li class="nav__item"><a href="#" class="nav__link">Compras</a></li>
+
+        <li class="nav__item"><a routerLink="/select_register" class="nav__link">Almacenes</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">Configuración</a></li>
+      </ul>
+    </nav>
+
+  
+</header>
+
+
+    <div class="container" style="margin-top: 40px;">
         <div class="row">
             <div class="col-ml-7">
                <div class="mt-4 text-center">
@@ -174,7 +266,7 @@
                               <td>{{ item.fecha_actualizacion }}</td>
                               <td>{{ item.fecha_registro }}</td>
                               <td>
-                                <a class="btn btn-outline-info" routerLink="detalleventa" >Detalle</a>                          
+                                <a class="btn btn-outline-info" routerLink="detallefactura" >Detalle</a>                          
                               </td>
                               <td> 
                                 <a class="btn btn-outline-danger" (click)="onDelete(item.id_venta)" >Anular</a>
